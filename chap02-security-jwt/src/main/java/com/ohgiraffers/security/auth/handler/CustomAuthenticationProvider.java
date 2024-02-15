@@ -35,7 +35,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         }
 
         // 인증성공 토큰 발행
-        return new UsernamePasswordAuthenticationToken(foundUser.getUsername(), foundUser.getPassword(), foundUser.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(foundUser, password, foundUser.getAuthorities());
     }
 
     @Override

@@ -1,10 +1,10 @@
 package com.ohgiraffers.security.auth.config;
 
 import com.ohgiraffers.security.auth.filter.CustomAuthenticationFilter;
+import com.ohgiraffers.security.auth.filter.jwtAuthorizationFilter;
 import com.ohgiraffers.security.auth.handler.CustomAuthFailureHandler;
 import com.ohgiraffers.security.auth.handler.CustomAuthSuccessHandler;
 import com.ohgiraffers.security.auth.handler.CustomAuthenticationProvider;
-import org.hibernate.annotations.Bag;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -96,8 +96,9 @@ public class WebSecurityConfig {
         authenticationFilter.setFilterProcessesUrl("/login");/* 어떤게 로그인 요청인지 확인해서 가로챔 */
         authenticationFilter.setAuthenticationSuccessHandler(customAuthSuccessHandler());
         authenticationFilter.setAuthenticationFailureHandler(customAuthFailureHandler());
+//        customAuthenticationFilter().afterPropertiesSet();
 
-        return customAuthenticationFilter();
+        return authenticationFilter;
     }
 
     /**
@@ -116,5 +117,13 @@ public class WebSecurityConfig {
     @Bean
     public CustomAuthFailureHandler customAuthFailureHandler() {
         return new CustomAuthFailureHandler();
+    }
+
+    /**
+     * 9. 사용자 요청시 수행되는 메서드
+     * @return JwtAuthorizationFilter
+     * */
+    public jwtAuthorizationFilter jwtAuthorizationFilter() {
+        return new jwtAuthorizationFilter(authenticationManager());
     }
 }

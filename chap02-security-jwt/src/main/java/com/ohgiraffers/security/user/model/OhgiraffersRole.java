@@ -4,7 +4,7 @@ public enum OhgiraffersRole {
 
     USER("USER"),
     ADMIN("ADMIN"),
-    ALL("USER, ADMIN");
+    ALL("USER,ADMIN");
 
     private String role;
 

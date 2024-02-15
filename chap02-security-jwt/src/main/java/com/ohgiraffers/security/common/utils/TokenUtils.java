@@ -18,13 +18,14 @@ public class TokenUtils {
     private static String jwtSecretKey;
     private static long tokenValidateTime;
 
+    // static 빼야됨
     @Value("${jwt.key}")
-    public static void setJwtSecretKey(String jwtSecretKey) {
+    public void setJwtSecretKey(String jwtSecretKey) {
         TokenUtils.jwtSecretKey = jwtSecretKey;
     }
 
     @Value("${jwt.time}")
-    public static void setTokenValidateTime(long tokenValidateTime) {
+    public void setTokenValidateTime(long tokenValidateTime) {
         TokenUtils.tokenValidateTime = tokenValidateTime;
     }
 
@@ -118,7 +119,7 @@ public class TokenUtils {
      * */
     private static Map<String, Object> createClaims(User user) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("username", user.getUserName());
+        claims.put("userId", user.getUserId());
         claims.put("Role", user.getRole());
         claims.put("userEmail", user.getUserEmail());
         return claims;
